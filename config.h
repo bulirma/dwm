@@ -1,8 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
-/*
 #include <X11/XF86keysym.h>
-*/
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -65,10 +63,10 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-/*
-static const char *increasevolume[] = { "amixer", "sset", "Master", "5%+", NULL };
-static const char *decreasevolume[] = { "amixer", "sset", "Master", "5%-", NULL };
-*/
+static const char *increasevolumecmd[] = { "amixer", "sset", "Master", "5%+", NULL };
+static const char *decreasevolumecmd[] = { "amixer", "sset", "Master", "5%-", NULL };
+static const char *increasebrightnesscmd[] = { "xbacklight", "-inc", "5", NULL };
+static const char *decreasebrightnesscmd[] = { "xbacklight", "-dec", "5", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -93,10 +91,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	/*
-	{ 0, 				XF86XK_AudioRaiseVolume, spawn, {.v = increasevolume } },
-	{ 0, 				XF86XK_AudioLowerVolume, spawn, {.v = decreasevolume } },
-	*/
+	{ 0, 				XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
+	{ 0, 				XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },
+	{ 0, 				XF86XK_MonBrightnessUp, spawn, {.v = increasebrightnesscmd } },
+	{ 0, 				XF86XK_MonBrightnessDown, spawn, {.v = decreasebrightnesscmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

@@ -62,11 +62,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_green, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *increasevolumecmd[] = { "amixer", "sset", "Master", "5%+", NULL };
-static const char *decreasevolumecmd[] = { "amixer", "sset", "Master", "5%-", NULL };
-static const char *increasebrightnesscmd[] = { "xbacklight", "-inc", "5", NULL };
-static const char *decreasebrightnesscmd[] = { "xbacklight", "-dec", "5", NULL };
+static const char *termcmd[]  = { "urxvt", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -91,10 +87,13 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ 0, 				XF86XK_AudioRaiseVolume, spawn, {.v = increasevolumecmd } },
-	{ 0, 				XF86XK_AudioLowerVolume, spawn, {.v = decreasevolumecmd } },
-	{ 0, 				XF86XK_MonBrightnessUp, spawn, {.v = increasebrightnesscmd } },
-	{ 0, 				XF86XK_MonBrightnessDown, spawn, {.v = decreasebrightnesscmd } },
+
+	{ 0,	XF86XK_AudioRaiseVolume, 	   spawn, SHCMD("pamixer -i 3; ~/.local/bin/status.sh") },
+	{ 0, 	XF86XK_AudioLowerVolume, 	   spawn, SHCMD("pamixer -d 3; ~/.local/bin/status.sh") },
+	{ 0, 	XF86XK_AudioMute, 	   	   spawn, SHCMD("pamixer -t") },
+	{ 0, 	XF86XK_MonBrightnessUp, 	   spawn, SHCMD("xbacklight -inc 3; ~/.local/bin/status.sh") },
+	{ 0, 	XF86XK_MonBrightnessDown, 	   spawn, SHCMD("xbacklight -dec 3; ~/.local/bin/status.sh") },
+	
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

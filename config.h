@@ -87,6 +87,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ MODKEY|ShiftMask,		XK_l,	   spawn, SHCMD("~/.local/bin/togglekbl.sh; ~/.local/bin/status.sh") },
 
 	{ 0,	XF86XK_AudioRaiseVolume, 	   spawn, SHCMD("pamixer -i 3; ~/.local/bin/status.sh") },
 	{ 0, 	XF86XK_AudioLowerVolume, 	   spawn, SHCMD("pamixer -d 3; ~/.local/bin/status.sh") },

@@ -50,6 +50,7 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod1Mask
+#define SUPERKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -101,6 +102,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      spawn, SHCMD("~/.local/bin/togglekbl.sh; ~/.local/bin/status.sh") },
 	{ 0, 				XK_Print,  spawn, SHCMD("scrot ~/pics/screenshots/$(date +'%d-%m-%y_%H:%M:%S').png") },
 	{ ShiftMask, 			XK_Print,  spawn, SHCMD("scrot -s ~/pics/screenshots/$(date +'%d-%m-%y_%H:%M:%S').png") },
+
+	{ SUPERKEY,             	XK_m,      spawn, SHCMD("~/.local/bin/mountutil.sh -m") },
+	{ SUPERKEY,             	XK_u,      spawn, SHCMD("~/.local/bin/mountutil.sh -u") },
+	{ SUPERKEY,             	XK_e,      spawn, SHCMD("~/.local/bin/mountutil.sh -e") },
 
 	{ 0,    XF86XK_AudioRaiseVolume,           spawn, SHCMD("pamixer -i 3; ~/.local/bin/status.sh") },
 	{ 0,    XF86XK_AudioLowerVolume,           spawn, SHCMD("pamixer -d 3; ~/.local/bin/status.sh") },
